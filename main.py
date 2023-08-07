@@ -1,4 +1,6 @@
 import pdfplumber
+import re
+from datetime import datetime
 
 text = ''
 
@@ -13,3 +15,10 @@ with pdfplumber.open('statement.pdf') as pdf:
 print(text)
 
 file.write(text)
+
+match_str = re.search(r"\d{1,2}\.\d{1,2}\.\d{2,4} \d{1,2}\.\d{1,2}\.\d{2,4}", text)
+
+print(match_str)
+
+# for element in text:
+#     if element 
