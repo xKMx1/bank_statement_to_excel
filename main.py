@@ -1,6 +1,12 @@
 import pdfplumber
 import re
 from datetime import datetime
+import openai
+
+openai.api_key = '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'
+
+messages = [ {"role": "system", "content": 
+              "You are a intelligent assistant."} ]
 
 text = ''
 
@@ -12,13 +18,11 @@ with pdfplumber.open('statement.pdf') as pdf:
         # extract text
         text += page.extract_text()
 
-print(text)
-
 file.write(text)
 
-match_str = re.search(r"\d{1,2}\.\d{1,2}\.\d{2,4} \d{1,2}\.\d{1,2}\.\d{2,4}", text)
+match_str = re.search(r"-?\d+,\d+ \d+ \d+,\d+", text)
+match_pos = match_str.span()[1]
 
-print(match_str)
 
 # for element in text:
 #     if element 
